@@ -1,0 +1,65 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: express-backend
+  namespace: ezpzos
+  labels:
+    app: express-backend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: express-backend
+  template:
+    metadata:
+      labels:
+        app: express-backend
+    spec:
+      serviceAccountName: ecr-esk-pull-image
+      containers:
+      - name: express-backend
+        image: 975049907995.dkr.ecr.ap-southeast-2.amazonaws.com/ezpzos-express:exp-v3 # Replace with your actual Docker image
+        ports:
+        - containerPort: 8000
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: DB_USER
+
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: DB_PASSWORD
+
+        - name: DB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: db-configmap  
+              key: DB_SERVER
+
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: db-configmap
+              key: DB_NAME
+
+        - name: DB_TRUST_SERVER_CERTIFICATE
+          valueFrom:
+            configMapKeyRef:
+              name: db-configmap
+              key: DB_TRUST_SERVER_CERTIFICATE
+
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: db-configmap
+              key: LOG_LEVEL
+
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-configmap
+              key: DB_PORT

@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: ecr-esk-pull-image
+  namespace: ezpzos
+  annotations:
+    eks.amazonaws.com/role-arn: arn:aws:iam::975049907995:role/EKS-ECR-ReadOnly-Role

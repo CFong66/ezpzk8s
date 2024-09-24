@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: database
+  namespace: ezpzos
+  labels:
+    app: database
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: database
+  template:
+    metadata:
+      labels:
+        app: database
+    spec:
+      serviceAccountName: ecr-esk-pull-image
+      containers:
+      - name: mssql
+        image: 975049907995.dkr.ecr.ap-southeast-2.amazonaws.com/ezpzos-backend:db-v2
+        ports:
+        - containerPort: 1433
+        env:
+        - name: DB_USER
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: DB_USER
+
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: db-credentials
+              key: DB_PASSWORD
+
+        - name: DB_SERVER
+          valueFrom:
+            configMapKeyRef:
+              name: db-config  
+              key: DB_SERVER
+
+        - name: DB_NAME
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: DB_NAME
+
+        - name: DB_TRUST_SERVER_CERTIFICATE
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: DB_TRUST_SERVER_CERTIFICATE
+
+        - name: LOG_LEVEL
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: LOG_LEVEL
+
+        - name: DB_PORT
+          valueFrom:
+            configMapKeyRef:
+              name: db-config
+              key: DB_PORT
+
+        volumeMounts:
+        - name: mssql-storage
+          mountPath: /var/lib/mssqlql/data
+      volumes:
+      - name: mssql-storage
+        persistentVolumeClaim:
+          claimName: mssql-pvc
