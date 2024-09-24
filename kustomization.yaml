@@ -1,0 +1,25 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+# List of YAML files to apply
+resources:
+  - namespace.yaml
+  # - tls-secret.yaml
+  # - mod-ing-controller.yaml
+  - db-configmap.yaml
+  - web-deploy.yaml
+  - web-service.yaml
+  - express-deploy.yaml
+  - express-service.yaml
+  - ecr-eks-svcacc.yaml
+  - ingress.yaml
+  - nginx-ingress-controller.yaml
+  - secret.yaml
+  - nginx-ingress-serviceaccount.yaml
+  - controller-cluster-role-binding.yaml
+  - controller-cluster-role.yaml
+  - ingress-configmap.yaml
+   # - pvc.yaml
+    # - db-deploy.yaml
+  # - db-service.yaml
+

@@ -1,0 +1,27 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: web-express-ingress
+  namespace: ezpzos
+  annotations:
+    spec.ingressClassName: "nginx"  # Ensure this matches your ingress controller
+    # nginx.ingress.kubernetes.io/rewrite-target: /
+    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
+spec:
+  # tls:
+  # - hosts:
+  #   - eks.ezpzos.com
+  #   secretName: tls-secret
+  rules:
+  - host: eks.ezpzos.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          # Directly specify the service and port without the "service" key
+          service:
+            name: web-frontend  # Your service name
+            port:
+              number: 80  # Your service port
