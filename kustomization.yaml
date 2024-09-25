@@ -6,7 +6,8 @@ resources:
   - namespace.yaml
   - tls-secret.yaml
   # - ingress-class.yaml
-  - tls-term-lb.yaml
+  # - tls-term-lb.yaml
+  - mod-ing-controller.yaml
   - db-configmap.yaml
   - web-deploy.yaml
   - web-service.yaml

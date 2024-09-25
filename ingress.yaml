@@ -9,10 +9,10 @@ metadata:
     nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
-  tls:
-  - hosts:
-    - eks.ezpzos.com
-    secretName: tls-secret-yaml
+  # tls:
+  # - hosts:
+  #   - eks.ezpzos.com
+  #   secretName: tls-secret-yaml
   ingressClassName: nginx-igc
   rules:
   - host: eks.ezpzos.com
