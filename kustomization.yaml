@@ -4,8 +4,9 @@ kind: Kustomization
 # List of YAML files to apply
 resources:
   - namespace.yaml
-  # - tls-secret.yaml
-  # - mod-ing-controller.yaml
+  - tls-secret.yaml
+  # - ingress-class.yaml
+  - tls-term-lb.yaml
   - db-configmap.yaml
   - web-deploy.yaml
   - web-service.yaml
@@ -13,12 +14,12 @@ resources:
   - express-service.yaml
   - ecr-eks-svcacc.yaml
   - ingress.yaml
-  - nginx-ingress-controller.yaml
+  # - nginx-ingress-controller.yaml
   - secret.yaml
-  - nginx-ingress-serviceaccount.yaml
-  - controller-cluster-role-binding.yaml
-  - controller-cluster-role.yaml
-  - ingress-configmap.yaml
+  # - nginx-ingress-serviceaccount.yaml
+  # - controller-cluster-role-binding.yaml
+  # - controller-cluster-role.yaml
+  # - ingress-configmap.yaml
    # - pvc.yaml
     # - db-deploy.yaml
   # - db-service.yaml

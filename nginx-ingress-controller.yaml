@@ -60,14 +60,14 @@ metadata:
   namespace: ingress-nginx
   annotations:
     # NLB without explicit SSL termination (might need backend service certificates)
-    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
+    # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"
 
-    # # NLB with SSL termination (requires TLS secret defined by ARN)
-    # service.beta.kubernetes.io/aws-load-balancer-type: "nlb"  # Network Load Balancer
-    # service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-southeast-2:975049907995:certificate/799d7606-b5a2-43ec-9b36-c68cc1fb7374  # ARN of the ACM certificate
-    # service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"  # Specify SSL ports
-    # service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "http"  # Protocol to use for backend services
-    # service.beta.kubernetes.io/aws-load-balancer-ssl-termination: "true"  # Enable SSL termination at the Load Balancer
+    # NLB with SSL termination (requires TLS secret defined by ARN)
+    service.beta.kubernetes.io/aws-load-balancer-type: "nlb"  # Network Load Balancer
+    service.beta.kubernetes.io/aws-load-balancer-ssl-cert: arn:aws:acm:ap-southeast-2:975049907995:certificate/799d7606-b5a2-43ec-9b36-c68cc1fb7374  # ARN of the ACM certificate
+    service.beta.kubernetes.io/aws-load-balancer-ssl-ports: "443"  # Specify SSL ports
+    service.beta.kubernetes.io/aws-load-balancer-backend-protocol: "https"  # Protocol to use for backend services
+    service.beta.kubernetes.io/aws-load-balancer-ssl-termination: "true"  # Enable SSL termination at the Load Balancer
 
 spec:
   type: LoadBalancer
@@ -83,3 +83,5 @@ spec:
 
   selector:
     app: nginx-ingress
+
+

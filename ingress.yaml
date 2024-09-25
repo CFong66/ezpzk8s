@@ -4,15 +4,16 @@ metadata:
   name: web-express-ingress
   namespace: ezpzos
   annotations:
-    spec.ingressClassName: "nginx"  # Ensure this matches your ingress controller
+    # spec.ingressClassName: "nginx"  
     # nginx.ingress.kubernetes.io/rewrite-target: /
-    # nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
     nginx.ingress.kubernetes.io/backend-protocol: "HTTP"
 spec:
-  # tls:
-  # - hosts:
-  #   - eks.ezpzos.com
-  #   secretName: tls-secret
+  tls:
+  - hosts:
+    - eks.ezpzos.com
+    secretName: tls-secret-yaml
+  ingressClassName: nginx-igc
   rules:
   - host: eks.ezpzos.com
     http:
