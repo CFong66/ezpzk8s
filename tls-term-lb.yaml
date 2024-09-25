@@ -6,6 +6,8 @@
 #     app.kubernetes.io/name: ingress-nginx
 #   name: ingress-nginx
 # ---
+
+# TLS terminates at NLB
 apiVersion: v1
 automountServiceAccountToken: true
 kind: ServiceAccount
